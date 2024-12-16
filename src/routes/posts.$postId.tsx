@@ -11,6 +11,7 @@ import {
 import { PostNotFoundError } from '../posts'
 import { postQueryOptions } from '../postQueryOptions'
 import type { ErrorComponentProps } from '@tanstack/react-router'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/posts/$postId')({
 	loader: ({ context: { queryClient }, params: { postId } }) => {
@@ -33,13 +34,13 @@ export function PostErrorComponent({ error }: ErrorComponentProps) {
 
 	return (
 		<div>
-			<button
+			<Button
 				onClick={() => {
 					router.invalidate()
 				}}
 			>
 				retry
-			</button>
+			</Button>
 			<ErrorComponent error={error} />
 		</div>
 	)
