@@ -4,6 +4,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite --port=3001",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
 		"build": "vite build && tsc --noEmit",
 		"serve": "vite preview",
 		"start": "vite"
@@ -23,6 +25,7 @@
 		"@types/react": "^18.2.47",
 		"@types/react-dom": "^18.2.18",
 		"@vitejs/plugin-react": "^4.3.4",
+		"prettier": "^3.4.2",
 		"typescript": "^5.7.2",
 		"vite": "^6.0.3"
 	}
