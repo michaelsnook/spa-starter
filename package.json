@@ -1,6 +1,6 @@
 {
-	"name": "tanstack-router-react-example-basic-react-query-file-based",
-	"private": true,
+	"name": "spa-starter",
+	"private": false,
 	"type": "module",
 	"scripts": {
 		"dev": "vite --port=3001",
@@ -22,11 +22,15 @@
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
+		"@types/node": "^22.10.2",
 		"@types/react": "^18.2.47",
 		"@types/react-dom": "^18.2.18",
 		"@vitejs/plugin-react": "^4.3.4",
+		"autoprefixer": "^10.4.20",
 		"husky": "^9.1.7",
+		"postcss": "^8.4.49",
 		"prettier": "^3.4.2",
+		"tailwindcss": "^3.4.16",
 		"typescript": "^5.7.2",
 		"vite": "^6.0.3",
 		"vite-tsconfig-paths": "^5.1.4"
