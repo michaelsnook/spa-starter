@@ -1,9 +1,9 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import Link from '@/components/Link'
-import { postsQueryOptions } from '../postsQueryOptions'
+import { postsQueryOptions } from '@/postsQueryOptions'
 
-export const Route = createFileRoute('/posts')({
+export const Route = createFileRoute('/_dashboard/_sample/posts')({
 	loader: ({ context: { queryClient } }) =>
 		queryClient.ensureQueryData(postsQueryOptions),
 	component: PostsComponent,

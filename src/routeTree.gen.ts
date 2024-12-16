@@ -11,231 +11,298 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PostsImport } from './routes/posts'
-import { Route as LayoutImport } from './routes/_layout'
-import { Route as IndexImport } from './routes/index'
-import { Route as PostsIndexImport } from './routes/posts.index'
-import { Route as PostsPostIdImport } from './routes/posts.$postId'
-import { Route as LayoutLayout2Import } from './routes/_layout/_layout-2'
-import { Route as LayoutLayout2LayoutBImport } from './routes/_layout/_layout-2/layout-b'
-import { Route as LayoutLayout2LayoutAImport } from './routes/_layout/_layout-2/layout-a'
+import { Route as DashboardImport } from './routes/_dashboard'
+import { Route as DashboardSampleImport } from './routes/_dashboard/_sample'
+import { Route as DashboardSampleIndexImport } from './routes/_dashboard/_sample/index'
+import { Route as DashboardSamplePostsImport } from './routes/_dashboard/_sample/posts'
+import { Route as DashboardSampleLayoutImport } from './routes/_dashboard/_sample/_layout'
+import { Route as DashboardSamplePostsIndexImport } from './routes/_dashboard/_sample/posts.index'
+import { Route as DashboardSamplePostsPostIdImport } from './routes/_dashboard/_sample/posts.$postId'
+import { Route as DashboardSampleLayoutLayout2Import } from './routes/_dashboard/_sample/_layout/_layout-2'
+import { Route as DashboardSampleLayoutLayout2LayoutBImport } from './routes/_dashboard/_sample/_layout/_layout-2/layout-b'
+import { Route as DashboardSampleLayoutLayout2LayoutAImport } from './routes/_dashboard/_sample/_layout/_layout-2/layout-a'
 
 // Create/Update Routes
 
-const PostsRoute = PostsImport.update({
+const DashboardRoute = DashboardImport.update({
+  id: '/_dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardSampleRoute = DashboardSampleImport.update({
+  id: '/_sample',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardSampleIndexRoute = DashboardSampleIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardSampleRoute,
+} as any)
+
+const DashboardSamplePostsRoute = DashboardSamplePostsImport.update({
   id: '/posts',
   path: '/posts',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DashboardSampleRoute,
 } as any)
 
-const LayoutRoute = LayoutImport.update({
+const DashboardSampleLayoutRoute = DashboardSampleLayoutImport.update({
   id: '/_layout',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DashboardSampleRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const DashboardSamplePostsIndexRoute = DashboardSamplePostsIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DashboardSamplePostsRoute,
 } as any)
 
-const PostsIndexRoute = PostsIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PostsRoute,
-} as any)
+const DashboardSamplePostsPostIdRoute = DashboardSamplePostsPostIdImport.update(
+  {
+    id: '/$postId',
+    path: '/$postId',
+    getParentRoute: () => DashboardSamplePostsRoute,
+  } as any,
+)
 
-const PostsPostIdRoute = PostsPostIdImport.update({
-  id: '/$postId',
-  path: '/$postId',
-  getParentRoute: () => PostsRoute,
-} as any)
+const DashboardSampleLayoutLayout2Route =
+  DashboardSampleLayoutLayout2Import.update({
+    id: '/_layout-2',
+    getParentRoute: () => DashboardSampleLayoutRoute,
+  } as any)
 
-const LayoutLayout2Route = LayoutLayout2Import.update({
-  id: '/_layout-2',
-  getParentRoute: () => LayoutRoute,
-} as any)
+const DashboardSampleLayoutLayout2LayoutBRoute =
+  DashboardSampleLayoutLayout2LayoutBImport.update({
+    id: '/layout-b',
+    path: '/layout-b',
+    getParentRoute: () => DashboardSampleLayoutLayout2Route,
+  } as any)
 
-const LayoutLayout2LayoutBRoute = LayoutLayout2LayoutBImport.update({
-  id: '/layout-b',
-  path: '/layout-b',
-  getParentRoute: () => LayoutLayout2Route,
-} as any)
-
-const LayoutLayout2LayoutARoute = LayoutLayout2LayoutAImport.update({
-  id: '/layout-a',
-  path: '/layout-a',
-  getParentRoute: () => LayoutLayout2Route,
-} as any)
+const DashboardSampleLayoutLayout2LayoutARoute =
+  DashboardSampleLayoutLayout2LayoutAImport.update({
+    id: '/layout-a',
+    path: '/layout-a',
+    getParentRoute: () => DashboardSampleLayoutLayout2Route,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout': {
-      id: '/_layout'
+    '/_dashboard': {
+      id: '/_dashboard'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof LayoutImport
+      preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/posts': {
-      id: '/posts'
+    '/_dashboard/_sample': {
+      id: '/_dashboard/_sample'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardSampleImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/_sample/_layout': {
+      id: '/_dashboard/_sample/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardSampleLayoutImport
+      parentRoute: typeof DashboardSampleImport
+    }
+    '/_dashboard/_sample/posts': {
+      id: '/_dashboard/_sample/posts'
       path: '/posts'
       fullPath: '/posts'
-      preLoaderRoute: typeof PostsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardSamplePostsImport
+      parentRoute: typeof DashboardSampleImport
     }
-    '/_layout/_layout-2': {
-      id: '/_layout/_layout-2'
+    '/_dashboard/_sample/': {
+      id: '/_dashboard/_sample/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardSampleIndexImport
+      parentRoute: typeof DashboardSampleImport
+    }
+    '/_dashboard/_sample/_layout/_layout-2': {
+      id: '/_dashboard/_sample/_layout/_layout-2'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof LayoutLayout2Import
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof DashboardSampleLayoutLayout2Import
+      parentRoute: typeof DashboardSampleLayoutImport
     }
-    '/posts/$postId': {
-      id: '/posts/$postId'
+    '/_dashboard/_sample/posts/$postId': {
+      id: '/_dashboard/_sample/posts/$postId'
       path: '/$postId'
       fullPath: '/posts/$postId'
-      preLoaderRoute: typeof PostsPostIdImport
-      parentRoute: typeof PostsImport
+      preLoaderRoute: typeof DashboardSamplePostsPostIdImport
+      parentRoute: typeof DashboardSamplePostsImport
     }
-    '/posts/': {
-      id: '/posts/'
+    '/_dashboard/_sample/posts/': {
+      id: '/_dashboard/_sample/posts/'
       path: '/'
       fullPath: '/posts/'
-      preLoaderRoute: typeof PostsIndexImport
-      parentRoute: typeof PostsImport
+      preLoaderRoute: typeof DashboardSamplePostsIndexImport
+      parentRoute: typeof DashboardSamplePostsImport
     }
-    '/_layout/_layout-2/layout-a': {
-      id: '/_layout/_layout-2/layout-a'
+    '/_dashboard/_sample/_layout/_layout-2/layout-a': {
+      id: '/_dashboard/_sample/_layout/_layout-2/layout-a'
       path: '/layout-a'
       fullPath: '/layout-a'
-      preLoaderRoute: typeof LayoutLayout2LayoutAImport
-      parentRoute: typeof LayoutLayout2Import
+      preLoaderRoute: typeof DashboardSampleLayoutLayout2LayoutAImport
+      parentRoute: typeof DashboardSampleLayoutLayout2Import
     }
-    '/_layout/_layout-2/layout-b': {
-      id: '/_layout/_layout-2/layout-b'
+    '/_dashboard/_sample/_layout/_layout-2/layout-b': {
+      id: '/_dashboard/_sample/_layout/_layout-2/layout-b'
       path: '/layout-b'
       fullPath: '/layout-b'
-      preLoaderRoute: typeof LayoutLayout2LayoutBImport
-      parentRoute: typeof LayoutLayout2Import
+      preLoaderRoute: typeof DashboardSampleLayoutLayout2LayoutBImport
+      parentRoute: typeof DashboardSampleLayoutLayout2Import
     }
   }
 }
 
 // Create and export the route tree
 
-interface LayoutLayout2RouteChildren {
-  LayoutLayout2LayoutARoute: typeof LayoutLayout2LayoutARoute
-  LayoutLayout2LayoutBRoute: typeof LayoutLayout2LayoutBRoute
+interface DashboardSampleLayoutLayout2RouteChildren {
+  DashboardSampleLayoutLayout2LayoutARoute: typeof DashboardSampleLayoutLayout2LayoutARoute
+  DashboardSampleLayoutLayout2LayoutBRoute: typeof DashboardSampleLayoutLayout2LayoutBRoute
 }
 
-const LayoutLayout2RouteChildren: LayoutLayout2RouteChildren = {
-  LayoutLayout2LayoutARoute: LayoutLayout2LayoutARoute,
-  LayoutLayout2LayoutBRoute: LayoutLayout2LayoutBRoute,
+const DashboardSampleLayoutLayout2RouteChildren: DashboardSampleLayoutLayout2RouteChildren =
+  {
+    DashboardSampleLayoutLayout2LayoutARoute:
+      DashboardSampleLayoutLayout2LayoutARoute,
+    DashboardSampleLayoutLayout2LayoutBRoute:
+      DashboardSampleLayoutLayout2LayoutBRoute,
+  }
+
+const DashboardSampleLayoutLayout2RouteWithChildren =
+  DashboardSampleLayoutLayout2Route._addFileChildren(
+    DashboardSampleLayoutLayout2RouteChildren,
+  )
+
+interface DashboardSampleLayoutRouteChildren {
+  DashboardSampleLayoutLayout2Route: typeof DashboardSampleLayoutLayout2RouteWithChildren
 }
 
-const LayoutLayout2RouteWithChildren = LayoutLayout2Route._addFileChildren(
-  LayoutLayout2RouteChildren,
+const DashboardSampleLayoutRouteChildren: DashboardSampleLayoutRouteChildren = {
+  DashboardSampleLayoutLayout2Route:
+    DashboardSampleLayoutLayout2RouteWithChildren,
+}
+
+const DashboardSampleLayoutRouteWithChildren =
+  DashboardSampleLayoutRoute._addFileChildren(
+    DashboardSampleLayoutRouteChildren,
+  )
+
+interface DashboardSamplePostsRouteChildren {
+  DashboardSamplePostsPostIdRoute: typeof DashboardSamplePostsPostIdRoute
+  DashboardSamplePostsIndexRoute: typeof DashboardSamplePostsIndexRoute
+}
+
+const DashboardSamplePostsRouteChildren: DashboardSamplePostsRouteChildren = {
+  DashboardSamplePostsPostIdRoute: DashboardSamplePostsPostIdRoute,
+  DashboardSamplePostsIndexRoute: DashboardSamplePostsIndexRoute,
+}
+
+const DashboardSamplePostsRouteWithChildren =
+  DashboardSamplePostsRoute._addFileChildren(DashboardSamplePostsRouteChildren)
+
+interface DashboardSampleRouteChildren {
+  DashboardSampleLayoutRoute: typeof DashboardSampleLayoutRouteWithChildren
+  DashboardSamplePostsRoute: typeof DashboardSamplePostsRouteWithChildren
+  DashboardSampleIndexRoute: typeof DashboardSampleIndexRoute
+}
+
+const DashboardSampleRouteChildren: DashboardSampleRouteChildren = {
+  DashboardSampleLayoutRoute: DashboardSampleLayoutRouteWithChildren,
+  DashboardSamplePostsRoute: DashboardSamplePostsRouteWithChildren,
+  DashboardSampleIndexRoute: DashboardSampleIndexRoute,
+}
+
+const DashboardSampleRouteWithChildren = DashboardSampleRoute._addFileChildren(
+  DashboardSampleRouteChildren,
 )
 
-interface LayoutRouteChildren {
-  LayoutLayout2Route: typeof LayoutLayout2RouteWithChildren
+interface DashboardRouteChildren {
+  DashboardSampleRoute: typeof DashboardSampleRouteWithChildren
 }
 
-const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutLayout2Route: LayoutLayout2RouteWithChildren,
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardSampleRoute: DashboardSampleRouteWithChildren,
 }
 
-const LayoutRouteWithChildren =
-  LayoutRoute._addFileChildren(LayoutRouteChildren)
-
-interface PostsRouteChildren {
-  PostsPostIdRoute: typeof PostsPostIdRoute
-  PostsIndexRoute: typeof PostsIndexRoute
-}
-
-const PostsRouteChildren: PostsRouteChildren = {
-  PostsPostIdRoute: PostsPostIdRoute,
-  PostsIndexRoute: PostsIndexRoute,
-}
-
-const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof LayoutLayout2RouteWithChildren
-  '/posts': typeof PostsRouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/posts/': typeof PostsIndexRoute
-  '/layout-a': typeof LayoutLayout2LayoutARoute
-  '/layout-b': typeof LayoutLayout2LayoutBRoute
+  '': typeof DashboardSampleLayoutLayout2RouteWithChildren
+  '/posts': typeof DashboardSamplePostsRouteWithChildren
+  '/': typeof DashboardSampleIndexRoute
+  '/posts/$postId': typeof DashboardSamplePostsPostIdRoute
+  '/posts/': typeof DashboardSamplePostsIndexRoute
+  '/layout-a': typeof DashboardSampleLayoutLayout2LayoutARoute
+  '/layout-b': typeof DashboardSampleLayoutLayout2LayoutBRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof LayoutLayout2RouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/posts': typeof PostsIndexRoute
-  '/layout-a': typeof LayoutLayout2LayoutARoute
-  '/layout-b': typeof LayoutLayout2LayoutBRoute
+  '': typeof DashboardSampleLayoutLayout2RouteWithChildren
+  '/': typeof DashboardSampleIndexRoute
+  '/posts/$postId': typeof DashboardSamplePostsPostIdRoute
+  '/posts': typeof DashboardSamplePostsIndexRoute
+  '/layout-a': typeof DashboardSampleLayoutLayout2LayoutARoute
+  '/layout-b': typeof DashboardSampleLayoutLayout2LayoutBRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_layout': typeof LayoutRouteWithChildren
-  '/posts': typeof PostsRouteWithChildren
-  '/_layout/_layout-2': typeof LayoutLayout2RouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/posts/': typeof PostsIndexRoute
-  '/_layout/_layout-2/layout-a': typeof LayoutLayout2LayoutARoute
-  '/_layout/_layout-2/layout-b': typeof LayoutLayout2LayoutBRoute
+  '/_dashboard': typeof DashboardRouteWithChildren
+  '/_dashboard/_sample': typeof DashboardSampleRouteWithChildren
+  '/_dashboard/_sample/_layout': typeof DashboardSampleLayoutRouteWithChildren
+  '/_dashboard/_sample/posts': typeof DashboardSamplePostsRouteWithChildren
+  '/_dashboard/_sample/': typeof DashboardSampleIndexRoute
+  '/_dashboard/_sample/_layout/_layout-2': typeof DashboardSampleLayoutLayout2RouteWithChildren
+  '/_dashboard/_sample/posts/$postId': typeof DashboardSamplePostsPostIdRoute
+  '/_dashboard/_sample/posts/': typeof DashboardSamplePostsIndexRoute
+  '/_dashboard/_sample/_layout/_layout-2/layout-a': typeof DashboardSampleLayoutLayout2LayoutARoute
+  '/_dashboard/_sample/_layout/_layout-2/layout-b': typeof DashboardSampleLayoutLayout2LayoutBRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | ''
     | '/posts'
+    | '/'
     | '/posts/$postId'
     | '/posts/'
     | '/layout-a'
     | '/layout-b'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/posts/$postId' | '/posts' | '/layout-a' | '/layout-b'
+  to: '' | '/' | '/posts/$postId' | '/posts' | '/layout-a' | '/layout-b'
   id:
     | '__root__'
-    | '/'
-    | '/_layout'
-    | '/posts'
-    | '/_layout/_layout-2'
-    | '/posts/$postId'
-    | '/posts/'
-    | '/_layout/_layout-2/layout-a'
-    | '/_layout/_layout-2/layout-b'
+    | '/_dashboard'
+    | '/_dashboard/_sample'
+    | '/_dashboard/_sample/_layout'
+    | '/_dashboard/_sample/posts'
+    | '/_dashboard/_sample/'
+    | '/_dashboard/_sample/_layout/_layout-2'
+    | '/_dashboard/_sample/posts/$postId'
+    | '/_dashboard/_sample/posts/'
+    | '/_dashboard/_sample/_layout/_layout-2/layout-a'
+    | '/_dashboard/_sample/_layout/_layout-2/layout-b'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  LayoutRoute: typeof LayoutRouteWithChildren
-  PostsRoute: typeof PostsRouteWithChildren
+  DashboardRoute: typeof DashboardRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  LayoutRoute: LayoutRouteWithChildren,
-  PostsRoute: PostsRouteWithChildren,
+  DashboardRoute: DashboardRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -248,50 +315,66 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/_layout",
-        "/posts"
+        "/_dashboard"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_layout": {
-      "filePath": "_layout.tsx",
+    "/_dashboard": {
+      "filePath": "_dashboard.tsx",
       "children": [
-        "/_layout/_layout-2"
+        "/_dashboard/_sample"
       ]
     },
-    "/posts": {
-      "filePath": "posts.tsx",
+    "/_dashboard/_sample": {
+      "filePath": "_dashboard/_sample.tsx",
+      "parent": "/_dashboard",
       "children": [
-        "/posts/$postId",
-        "/posts/"
+        "/_dashboard/_sample/_layout",
+        "/_dashboard/_sample/posts",
+        "/_dashboard/_sample/"
       ]
     },
-    "/_layout/_layout-2": {
-      "filePath": "_layout/_layout-2.tsx",
-      "parent": "/_layout",
+    "/_dashboard/_sample/_layout": {
+      "filePath": "_dashboard/_sample/_layout.tsx",
+      "parent": "/_dashboard/_sample",
       "children": [
-        "/_layout/_layout-2/layout-a",
-        "/_layout/_layout-2/layout-b"
+        "/_dashboard/_sample/_layout/_layout-2"
       ]
     },
-    "/posts/$postId": {
-      "filePath": "posts.$postId.tsx",
-      "parent": "/posts"
+    "/_dashboard/_sample/posts": {
+      "filePath": "_dashboard/_sample/posts.tsx",
+      "parent": "/_dashboard/_sample",
+      "children": [
+        "/_dashboard/_sample/posts/$postId",
+        "/_dashboard/_sample/posts/"
+      ]
     },
-    "/posts/": {
-      "filePath": "posts.index.tsx",
-      "parent": "/posts"
+    "/_dashboard/_sample/": {
+      "filePath": "_dashboard/_sample/index.tsx",
+      "parent": "/_dashboard/_sample"
     },
-    "/_layout/_layout-2/layout-a": {
-      "filePath": "_layout/_layout-2/layout-a.tsx",
-      "parent": "/_layout/_layout-2"
+    "/_dashboard/_sample/_layout/_layout-2": {
+      "filePath": "_dashboard/_sample/_layout/_layout-2.tsx",
+      "parent": "/_dashboard/_sample/_layout",
+      "children": [
+        "/_dashboard/_sample/_layout/_layout-2/layout-a",
+        "/_dashboard/_sample/_layout/_layout-2/layout-b"
+      ]
     },
-    "/_layout/_layout-2/layout-b": {
-      "filePath": "_layout/_layout-2/layout-b.tsx",
-      "parent": "/_layout/_layout-2"
+    "/_dashboard/_sample/posts/$postId": {
+      "filePath": "_dashboard/_sample/posts.$postId.tsx",
+      "parent": "/_dashboard/_sample/posts"
+    },
+    "/_dashboard/_sample/posts/": {
+      "filePath": "_dashboard/_sample/posts.index.tsx",
+      "parent": "/_dashboard/_sample/posts"
+    },
+    "/_dashboard/_sample/_layout/_layout-2/layout-a": {
+      "filePath": "_dashboard/_sample/_layout/_layout-2/layout-a.tsx",
+      "parent": "/_dashboard/_sample/_layout/_layout-2"
+    },
+    "/_dashboard/_sample/_layout/_layout-2/layout-b": {
+      "filePath": "_dashboard/_sample/_layout/_layout-2/layout-b.tsx",
+      "parent": "/_dashboard/_sample/_layout/_layout-2"
     }
   }
 }
