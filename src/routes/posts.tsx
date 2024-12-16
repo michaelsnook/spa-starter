@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import Link from '@/components/Link'
 import { postsQueryOptions } from '../postsQueryOptions'
 
 export const Route = createFileRoute('/posts')({

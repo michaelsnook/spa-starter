@@ -2,6 +2,7 @@
 node_modules
 bun.lockb
 pnpm-lock.yaml
+routeTree.gen.ts
 src/supabase/.temp
 src/types/supabase.ts
 src/*.gen.ts
