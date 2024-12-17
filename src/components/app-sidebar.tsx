@@ -1,4 +1,3 @@
-import * as React from 'react'
 import {
 	AudioWaveform,
 	BookOpen,
@@ -23,6 +22,7 @@ import {
 	SidebarHeader,
 	SidebarRail,
 } from '@/components/ui/sidebar'
+import { NavTheme } from './nav-theme'
 
 // This is sample data.
 const data = {
@@ -165,6 +165,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<NavProjects projects={data.projects} />
 			</SidebarContent>
 			<SidebarFooter>
+				<NavTheme />
 				<NavUser user={data.user} />
 			</SidebarFooter>
 			<SidebarRail />

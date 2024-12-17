@@ -1,5 +1,3 @@
-'use client'
-
 import {
 	BadgeCheck,
 	Bell,
@@ -25,7 +23,6 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
-import { ThemeToggle } from './theme-toggle'
 
 export function NavUser({
 	user,

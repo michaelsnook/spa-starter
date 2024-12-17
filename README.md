@@ -14,3 +14,4 @@ Comes with my own personal faves:
 - TailwindCSS for styles
 - ShadCN/ui components
   - Sidebar layout
+  - Dark mode support
